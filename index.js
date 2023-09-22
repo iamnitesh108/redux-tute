@@ -20,9 +20,17 @@ function reducer(state = { amount: 1 }, action) {
   return state;
 }
 
-
-
+// Action Creators
+function increment() {
+    return {type: 'increment'}
+}
+function decrement() {
+    return {type: 'decrement'}
+}
+function incrementByAmount(value) {
+    return {type: 'incrementByAmount', payload: value}
+}
 //Dispatch Event
 setInterval(() => {
-  store.dispatch({ type: "incrementByAmount", payload: 10 });
+  store.dispatch(incrementByAmount(100));
 }, 1000);
