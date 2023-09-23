@@ -41,10 +41,15 @@ function reducer(state = { amount: 1 }, action) {
 
 
 // Action Creators
-async function initUser(dispatch, getState) {
-  const { data } = await axios.get("http://localhost:3000/account/2");
-
-  dispatch( { type: init, payload: data.amount } );
+function getUser(id) {
+  return async (dispatch, getState) => {
+    const { data } = await axios.get(`http://localhost:3000/account/${id}`);
+      dispatch(initUser(data.amount));
+  };
+  
+}
+function initUser(value) {
+  return {type: init, payload: value }
 }
 function increment() {
   return { type: inc };
@@ -58,6 +63,6 @@ function incrementByAmount(value) {
 
 //Dispatch Event
 setInterval(() => {
-  store.dispatch(initUser);
+  store.dispatch(getUser(2));
 }, 1000);
 
